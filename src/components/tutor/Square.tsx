@@ -1,18 +1,18 @@
 import { SquareStyle } from "../../styles/style";
-import { useState } from "react";
-export default function Square({ nilai }: { nilai: number }) {
-  const [value, setValue] = useState("");
-
-  function handleClick() {
-    setValue("X");
-  }
+export default function Square({
+  value,
+  onSquareClick,
+}: {
+  value: any;
+  onSquareClick: any;
+}) {
   return (
     // mengembalikan element button
     <button
+      onClick={onSquareClick}
       className={`${SquareStyle} cursor-pointer hover:bg-slate-600`}
-      onClick={handleClick}
     >
-      {nilai} {value}
+      {value}
     </button>
   );
 }

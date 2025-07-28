@@ -1,4 +1,4 @@
-import Table from "./tutor/Table";
+import Board from "./tutor/Table";
 import { ContainerStyle } from "../styles/style";
 
 export default function Game() {
@@ -6,7 +6,7 @@ export default function Game() {
     <>
       <div className={ContainerStyle}>
         {/* ini table nya */}
-        <Table />
+        <Board />
       </div>
     </>
   );
