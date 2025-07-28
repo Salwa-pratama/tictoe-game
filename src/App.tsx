@@ -1,10 +1,10 @@
-import Tiktoe from "./components/Tictoe";
+import Game from "./components/Tictoe";
 
 function App() {
   return (
     <>
       {/* Component */}
-      <Tiktoe />
+      <Game />
     </>
   );
 }

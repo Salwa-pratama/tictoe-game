@@ -1,7 +1,13 @@
-export default function Tiktoe() {
+import Table from "./tutor/Table";
+import { ContainerStyle } from "../styles/style";
+
+export default function Game() {
   return (
     <>
-      <h1 className="text-sky-500 bg-black">Halo Tik Toe</h1>
+      <div className={ContainerStyle}>
+        {/* ini table nya */}
+        <Table />
+      </div>
     </>
   );
 }
