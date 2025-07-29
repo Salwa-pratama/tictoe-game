@@ -1,9 +1,7 @@
-export default function TimeTravel() {
+export default function TimeTravel({ moves }: any) {
   return (
     <>
-      <ol>
-        <li className="bg-gray-500 rounded px-2 text-black">Game 1</li>
-      </ol>
+      <ol className="list-decimal">{moves}</ol>
     </>
   );
 }

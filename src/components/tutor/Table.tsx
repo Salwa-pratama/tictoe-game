@@ -1,14 +1,15 @@
 import Square from "./Square";
-import { useState } from "react";
 import calculateWinner from "./CalculateWinner";
 
-export default function Board() {
-  const data = Array.from({ length: 9 }, (_, i) => i);
-  // Ini tu mengii semua kotak dengan null
-  const [squares, setSquares] = useState(Array(9).fill(null));
+// Ini tipe data untuk props element Board kita
+interface tipeProps {
+  xIsNext: any;
+  squares: any;
+  onPlay: any;
+}
 
-  // Use State untuk pergantian player
-  const [xIsNext, setXIsNext] = useState(true);
+export default function Board({ xIsNext, squares, onPlay }: tipeProps) {
+  const data = Array.from({ length: 9 }, (_, i) => i);
 
   // Ini fungsi handleClick nya
   function handleClick(i: any) {
@@ -30,8 +31,8 @@ export default function Board() {
       return;
     }
 
-    setSquares(nextSquares);
-    setXIsNext(!xIsNext);
+    onPlay(nextSquares);
+    // setXIsNext(!xIsNext);
   }
 
   const winner = calculateWinner(squares);
