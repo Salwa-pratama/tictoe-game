@@ -1,4 +1,5 @@
 import Board from "./tutor/Table";
+import TimeTravel from "./tutor/TimeTravel";
 import { ContainerStyle } from "../styles/style";
 
 export default function Game() {
@@ -6,7 +7,10 @@ export default function Game() {
     <>
       <div className={ContainerStyle}>
         {/* ini table nya */}
-        <Board />
+        <div className="flex items-center justify-center gap-5">
+          <Board />
+          <TimeTravel />
+        </div>
       </div>
     </>
   );
