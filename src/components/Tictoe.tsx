@@ -1,17 +1,24 @@
 import Board from "./tutor/Table";
-import TimeTravel from "./tutor/TimeTravel";
 import { ContainerStyle } from "../styles/style";
 import { useState } from "react";
 
 export default function Game() {
-  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [history, setHistory] = useState([
+    {
+      squares: Array(9).fill(null),
+      position: null,
+    },
+  ]);
   // membaca histori saat ini
   const [currentMove, setCurrentMove] = useState(0);
   const xIsNext = currentMove % 2 === 0;
-  const currentSquares = history[currentMove];
+  const currentSquares = history[currentMove].squares;
 
-  function handlePlay(nextSquares: any) {
-    const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
+  function handlePlay(nextSquares: any, clickedIndex: number) {
+    const nextHistory = [
+      ...history.slice(0, currentMove + 1),
+      { squares: nextSquares, position: clickedIndex },
+    ];
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
   }
@@ -20,10 +27,17 @@ export default function Game() {
     setCurrentMove(nextMove);
   }
 
-  const moves = history.map((squares, move) => {
+  const moves = history.map((step, move) => {
+    const { position } = step;
+    let row = null;
+    let col = null;
+    if (position !== null) {
+      row = Math.floor(position / 3) + 1;
+      col = (position % 3) + 1;
+    }
     let description;
     if (move > 0) {
-      description = "pergi ke langkah #" + move;
+      description = `Pergi ke langkah #${move} (${row}, ${col})`;
     } else {
       description = "Pergi ke awal permainan";
     }
@@ -40,6 +54,9 @@ export default function Game() {
     );
   });
 
+  // Posisi
+  const [isAscending, setIsascending] = useState(true);
+
   return (
     <>
       <div className={ContainerStyle}>
@@ -50,8 +67,17 @@ export default function Game() {
             squares={currentSquares}
             onPlay={handlePlay}
           />
-          <TimeTravel moves={moves} />
         </div>
+        <p>Posisi ke: {currentMove} </p>
+        <button
+          className="bg-sky-500 p-1 rounded"
+          onClick={() => setIsascending(!isAscending)}
+        >
+          urutan: {isAscending ? "naik" : "turun"}
+        </button>
+        <ul className="border-black border h-[150px] flex flex-wrap p-1 mt-1 gap-2 ">
+          {isAscending ? moves : [...moves].reverse()}
+        </ul>
       </div>
     </>
   );
@@ -60,13 +86,13 @@ export default function Game() {
 // Ada PR dari react
 
 //**
-// 1. Untuk langkah saat ii saja, tampilkan "Anda berada di langkah #"
+// 1. Untuk langkah saat ii saja, tampilkan "Anda berada di langkah # ✅"
 // 2. Tulis ulang Board untuk menggunakan dua loop untuk membuat kotak alih
 //     - alih menulisnya satu persatu (Udehhh✅)
 // 3. Tambahkan tombol sakelar yang memungkinkan anda mengurutkan langkah
-//    dalam urutan naik atau turun
+//    dalam urutan naik atau turun.   Udehhh✅
 // 4. Ketika seseorang menang, sorot tiga kotak yang menyebabkan kemenangan
 //    tersebut(dan ketika tidak ada yang menang, tampilkan pesan bahwa hasilnya
-//     seri/draw)
+//     seri/draw) ✅
 // 5. Menampilkan lokasi untuk setiap langkah dalam format (baris, kolom) dalam
-//    daftar riwayat langkah */
+//    daftar riwayat langkah */  ✅

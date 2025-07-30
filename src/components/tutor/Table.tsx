@@ -31,16 +31,21 @@ export default function Board({ xIsNext, squares, onPlay }: tipeProps) {
       return;
     }
 
-    onPlay(nextSquares);
+    onPlay(nextSquares, i);
     // setXIsNext(!xIsNext);
   }
 
-  const winner = calculateWinner(squares);
+  const result = calculateWinner(squares);
+  const winner = result?.winner;
+  const winningLine = result?.line || [];
+  const isDraw = !winner && squares.every((square: any) => square !== null);
   let status: string;
   if (winner) {
     status = "pemenang: " + winner;
+  } else if (isDraw) {
+    status = "Hasil Seri";
   } else {
-    status = "Pemain selanjutnya: " + (xIsNext ? "X" : "O");
+    status = "Giliran: " + (xIsNext ? "X" : "O");
   }
 
   return (
@@ -62,6 +67,7 @@ export default function Board({ xIsNext, squares, onPlay }: tipeProps) {
                     key={kolomIndex}
                     value={squares[nilai]}
                     onSquareClick={() => handleClick(nilai)}
+                    highLight={winningLine.includes(nilai)}
                   />
                 ))}
             </div>
