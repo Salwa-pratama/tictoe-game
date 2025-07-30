@@ -9,6 +9,7 @@ export default function Game() {
       position: null,
     },
   ]);
+
   // membaca histori saat ini
   const [currentMove, setCurrentMove] = useState(0);
   const xIsNext = currentMove % 2 === 0;
@@ -41,7 +42,6 @@ export default function Game() {
     } else {
       description = "Pergi ke awal permainan";
     }
-
     return (
       <li key={move}>
         <button
@@ -53,7 +53,6 @@ export default function Game() {
       </li>
     );
   });
-
   // Posisi
   const [isAscending, setIsascending] = useState(true);
 
@@ -84,7 +83,6 @@ export default function Game() {
 }
 
 // Ada PR dari react
-
 //**
 // 1. Untuk langkah saat ii saja, tampilkan "Anda berada di langkah # ✅"
 // 2. Tulis ulang Board untuk menggunakan dua loop untuk membuat kotak alih
